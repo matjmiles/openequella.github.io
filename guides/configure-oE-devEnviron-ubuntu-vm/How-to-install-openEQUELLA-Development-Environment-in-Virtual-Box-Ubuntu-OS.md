@@ -33,10 +33,10 @@
 
 ### <a id="user-content-install-oracle" class="anchor" aria-hidden="true" href="#install-oracle"></a> Install Oracle Virtual Box VM Software
 
-Before installing Virtual Box on Windows 10 you must change turn of the Containers and Hyper-V features.
+Before installing Virtual Box on Windows 10 you must turn of the Containers and Hyper-V features.
 
 1. To do this click on the Windows Start Menu and type “Turn Windows” which should bring up the option you see below.
-2. Click on “Open.
+2. Click on “Open".
 
 ![turn off windows features](images/01%20turn%20windows%20features%20off.jpg)
 
@@ -193,7 +193,7 @@ Now you can download Oracle Virtual Box
 
 ![get curl](images/37%20get%20curl.PNG)
 
-7. You will get an error that curl is not install, but you can install it as prompted with the command. When prompted you will need to enter the administrator password you setup when you installed Ubuntu.
+7. You will get an error that curl is not installed, but you can install it as prompted with the command. When prompted you will need to enter the administrator password you setup when you installed Ubuntu.
 
 `$ sudo apt install curl`
 
@@ -281,7 +281,7 @@ The output will look like this.
 
 8. Type “exit” to escape root.
 
-### <a id="user-content-install-pgadmin" class="anchor" aria-hidden="true" href="#install-pgadmin"></a>Install Pgadmin4
+### <a id="user-content-install-pgadmin" class="anchor" aria-hidden="true" href="#install-pgadmin"></a>Install Pgadmin4 (Note: PGA4 is not necessarily a requirement of oEQ development - especially if you're using IntellIJ as it has a very capable database manager.)
 
 1. Now install the PostgreSQL admin tool. All of the command will be provided below. The website from where these commands were taken is found here:  [Click here to view Pgadmin Install for Ubuntu 20.40.4](https://yallalabs.com/linux/how-to-install-pgadmin4-ubuntu-20-04/)
 
@@ -301,7 +301,7 @@ The output will look like this.
 
 `$ sudo /usr/pgadmin4/bin/setup-web.sh`
 
-`The output should look like what you see below. You will be prompted for an email address and password. You will also be prompted to restart the apache server. `
+The output should look like what you see below. You will be prompted for an email address and password. You will also be prompted to restart the apache server. 
 
 `Setting up pgAdmin 4 in web mode on a Debian platform...`
 `Creating configuration database...`
@@ -456,13 +456,13 @@ output: `Generating public/private rsa key pair.`
 
 ![new key](images/github/06%20new%20key.png)
 
-6. Give the ssh key a name, and past the key into the Key field. Then click the “Add SSH key” button.
+6. Give the SSH key a name, and past the key into the Key field. Then click the “Add SSH key” button.
 
 ![paste key](images/github/07%20paste%20key.png)
 
 ### <a id="user-content-clone-repo" class="anchor" aria-hidden="true" href="#clone-repo"></a>Clone the openEQUELLA Repository
 
-1. Navigate to the home page of the openEQUELLA repository and click on the green “Code” button. Then copy the git command to “Clone with SSH”.
+1. Navigate to the home page of the openEQUELLA repository and click on the green “Code” button. Then copy the git command to “Clone with SSH”. (Note: If you will be contributing pull requests to openEQUELLA, developers will need to be on their own fork as opposed to just cloning the official repo.)
 
 ![get code](images/clone/01%20get%20code.png)
 
@@ -482,7 +482,7 @@ d. Clone the openEquella repository
 
 ### <a id="user-content-install-sbt" class="anchor" aria-hidden="true" href="#install-sbt"></a>Install SBT
 
-SBT is used to make the project. Because we installed sdkman to install Java, we can also use sdkman to install SBT, follow the commands below.
+SBT is used to make the project. Because we installed sdkman to install Java, we can also use sdkman to install SBT, follow the command below.
 
 `$ sdkman install sbt`
 
@@ -515,10 +515,29 @@ Verify you are on currently on the develop branch.
 
 `git checkout -b enhancement1`
 
+Note:
+
+Branches should follow the naming convention of:
+feature/<issue#>-<short_desc>
+
+Or if for a bug, you can choose to:
+bugfix/<issue#>-<short_desc>
+
+For example:
+
+feature/123-make_coffee
+or:
+
+bugfix/124-fix_burnt_coffee
+
+If you're unsure which to use, default to using feature/<issue#>-<short_desc>.
+
 ![git new branch](images/clone/06%20git%20new%20branch.png)
 
 `git remote set-url origin'</br>
  'git@github.com:someone/openEQUELLA.git`
+ 
+ Note: Please ensure you provide [quality commit messages](https://chris.beams.io/posts/git-commit/), and in the PR please detail what testing you have undertaken. Also, ideally provide some tests as part of your PR and/or details of any manual tests you performed.
 
 ### <a id="user-content-import-sbt" class="anchor" aria-hidden="true" href="#import-sbt"></a>Import sbt project into Intellij
 
@@ -540,12 +559,12 @@ Verify you are on currently on the develop branch.
 
 1. f you don't have enough RAM on your host OS, please bring your max heap config down to 3072 or even lower to 2048 if sbt fails ( via the -mem in **.sbtopts** ). 
 
-NOTE:  If you cannot cannot see **.sbtopts** from the file manager you can type cntr +H which will reveal hidden files. The other options is to
- access the file from a terminal windows. Navigate to the openEquella directory and type the command below.
+NOTE:  If you cannot see **.sbtopts** from the file manager you can type CNTRL+H which will reveal hidden files. The other options is to
+ access the file from a terminal window. Navigate to the openEquella directory and type the command below.
 
 ![sbtopts](images/Intellij/04%20sbtopts.png)
 
-2. Either way change the value of –mem to 3072 or 2048 then cntr + o to save changes to the file. Then cntr + x to close the file.
+2. Either way change the value of –mem to 3072 or 2048 then CNTRL+O to save changes to the file. Then CNTR+X to close the file.
 
 ![set mem](images/Intellij/05%20set%20mem.png)
 
@@ -558,7 +577,7 @@ NOTE:  If you cannot cannot see **.sbtopts** from the file manager you can type 
 `Sbt:Equella> compile`</br>
 `Sbt:Equella> prepareDevConfig`
 
-5. (not in the sbt shell) access the Dev/learningedge-config folder using the file manager, and update **hibernate.properties** and **mandatory-config.properties** to match your environment (postgresql database and admin.url. You can edit the files by right clicking on each one and selected “Open With Text Editor.”
+5. (not in the sbt shell) access the Dev/learningedge-config folder using the file manager, and update **hibernate.properties** and **mandatory-config.properties** to match your environment postgresql database and admin.url. You can edit the files by right clicking on each one and selecting “Open With Text Editor.”
 
 **hibernate.properties**
 ![hibernate config](images/Intellij/07%20hibernate%20config.png)
